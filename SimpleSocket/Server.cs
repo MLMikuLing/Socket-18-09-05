@@ -23,7 +23,7 @@ namespace SimpleSocket
         private Thread listenClientConn;
         private Socket server;
         private IPAddress ipAddress;
-        private static ServerSide Instance;
+        public static ServerSide Instance;
         private ServerSide(string ip, int port)
         {
             DeleEvent.sendMessage += Write;
@@ -44,16 +44,23 @@ namespace SimpleSocket
         {
             Instance = new ServerSide(ip, port);
         }
-
+        Socket clientTemp;
         private void ListenConn()
         {
             while (true)
             {
-                Socket client = server.Accept();
+                clientTemp = server.Accept();
+                Socket client = clientTemp;
                 Client c = new Client(client, clientID);
                 SaveClientConn.Add(clientID, c);
+                Console.WriteLine("Client连入:" + clientID);
                 clientID++;
             }
+        }
+
+        public Socket Get()
+        {
+            return server;
         }
 
         private void Write(string clientMes)
@@ -80,17 +87,22 @@ namespace SimpleSocket
         {
             while (true)
             {
-                try { 
+                try
+                {
                     int length = client.Receive(result);
                     Console.WriteLine("Client-{0}:{1}", clientID, Encoding.UTF8.GetString(result, 0, length));
                     DeleEvent.sendMessage -= SendMessage;
-                    DeleEvent.sendMessage(client + ":"+Encoding.UTF8.GetString(result, 0, length));
+                    DeleEvent.sendMessage(client + ":" + Encoding.UTF8.GetString(result, 0, length));
                     DeleEvent.sendMessage += SendMessage;
                     SendMessage("Server:我知道了,你可以闭嘴了");
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Client-{0}关闭连接:Info-{1}", clientID, ex.Message);
+                    client.Shutdown(SocketShutdown.Both);
+                    DeleEvent.sendMessage -= SendMessage;
+                    client.Close();
+                    receive.Abort();
                     break;
                 }
             }
@@ -105,7 +117,7 @@ namespace SimpleSocket
     {
         public delegate void dele(string info);
         public static dele sendMessage;
-               
+
         public static void AddEvent(dele e)
         {
             sendMessage += e;

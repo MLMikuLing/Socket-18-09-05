@@ -15,10 +15,11 @@ namespace Client
             ReceiveEvent.Instance.AddEvent(cw);
             ConnServer.Initial("127.0.0.1", 9002);
             ConnServer.Instance.Conn();
-
             while (true)
             {
                 string str = Console.ReadLine();
+                if (str == "back")
+                    break;
                 ConnServer.Instance.SendMessage(str);
             }
         }
@@ -65,6 +66,16 @@ namespace Client
                 startReceive.Start();
             }
         }
+
+        /// <summary>
+        /// 关闭连接，在OnDestroy中调用
+        /// </summary>
+        public void Close()
+        {
+            client.Shutdown(SocketShutdown.Both);
+            client.Close();
+        }
+
         /// <summary>
         /// 接收来自服务器的信息
         /// </summary>
@@ -83,6 +94,7 @@ namespace Client
         {
             client.Send(Encoding.UTF8.GetBytes(info));
         }
+
         /// <summary>
         /// 初始化参数
         /// </summary>

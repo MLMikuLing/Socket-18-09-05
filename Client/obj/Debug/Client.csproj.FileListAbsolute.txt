@@ -1,6 +1,7 @@
-C:\Users\Administrator\source\repos\SimpleSocket\Client\bin\Debug\Client.exe
 C:\Users\Administrator\source\repos\SimpleSocket\Client\bin\Debug\Client.pdb
-C:\Users\Administrator\source\repos\SimpleSocket\Client\obj\Debug\Client.csprojAssemblyReference.cache
 C:\Users\Administrator\source\repos\SimpleSocket\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
-C:\Users\Administrator\source\repos\SimpleSocket\Client\obj\Debug\Client.exe
 C:\Users\Administrator\source\repos\SimpleSocket\Client\obj\Debug\Client.pdb
+C:\Users\Administrator\source\repos\SimpleSocket\Client\bin\Debug\Client.xml
+C:\Users\Administrator\source\repos\SimpleSocket\Client\bin\Debug\Client.exe
+C:\Users\Administrator\source\repos\SimpleSocket\Client\obj\Debug\Client.exe
+C:\Users\Administrator\source\repos\SimpleSocket\Client\obj\Debug\Client.csprojAssemblyReference.cache
