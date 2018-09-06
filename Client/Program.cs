@@ -39,6 +39,8 @@ namespace Client
         private string ip;
         private int port;
         private IPAddress ipaddress;
+        private Thread startReceive;
+        private bool IsClose = false;
         private byte[] result = new byte[1024];
         /// <summary>
         /// 初始化参数
@@ -61,7 +63,7 @@ namespace Client
             if (!client.Connected)
             {
                 client.Connect(new IPEndPoint(ipaddress, port));
-                Thread startReceive = new Thread(ReceiveMessage);
+                startReceive = new Thread(ReceiveMessage);
                 startReceive.IsBackground = true;
                 startReceive.Start();
             }
@@ -72,6 +74,8 @@ namespace Client
         /// </summary>
         public void Close()
         {
+            IsClose = true;
+            startReceive = null;
             client.Shutdown(SocketShutdown.Both);
             client.Close();
         }
@@ -83,6 +87,8 @@ namespace Client
         {
             while (true)
             {
+                if (IsClose)
+                    break;
                 int mesLength = client.Receive(result);
                 ReceiveEvent.Instance.play(Encoding.UTF8.GetString(result, 0, mesLength));
             }

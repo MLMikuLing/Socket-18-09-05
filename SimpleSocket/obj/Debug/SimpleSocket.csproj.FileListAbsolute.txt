@@ -3,4 +3,6 @@ C:\Users\Administrator\source\repos\SimpleSocket\SimpleSocket\bin\Debug\SimpleSo
 C:\Users\Administrator\source\repos\SimpleSocket\SimpleSocket\obj\Debug\SimpleSocket.csproj.CoreCompileInputs.cache
 C:\Users\Administrator\source\repos\SimpleSocket\SimpleSocket\obj\Debug\SimpleSocket.exe
 C:\Users\Administrator\source\repos\SimpleSocket\SimpleSocket\obj\Debug\SimpleSocket.pdb
+C:\Users\Administrator\source\repos\SimpleSocket\SimpleSocket\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Administrator\source\repos\SimpleSocket\SimpleSocket\obj\Debug\SimpleSocket.csproj.CopyComplete
 C:\Users\Administrator\source\repos\SimpleSocket\SimpleSocket\obj\Debug\SimpleSocket.csprojAssemblyReference.cache

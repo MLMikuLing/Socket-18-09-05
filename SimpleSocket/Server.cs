@@ -90,15 +90,15 @@ namespace SimpleSocket
                 try
                 {
                     int length = client.Receive(result);
-                    Console.WriteLine("Client-{0}:{1}", clientID, Encoding.UTF8.GetString(result, 0, length));
+                    if (length == 0)  // 这里 Unity关闭后 会一直接受到Unity客户端的空包 未找到原因
+                        continue;
                     DeleEvent.sendMessage -= SendMessage;
-                    DeleEvent.sendMessage(client + ":" + Encoding.UTF8.GetString(result, 0, length));
+                    DeleEvent.sendMessage(clientID + ":" + Encoding.UTF8.GetString(result, 0, length));
                     DeleEvent.sendMessage += SendMessage;
-                    SendMessage("Server:我知道了,你可以闭嘴了");
+                    //SendMessage("999:我知道了,你可以闭嘴了");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Client-{0}关闭连接:Info-{1}", clientID, ex.Message);
                     client.Shutdown(SocketShutdown.Both);
                     DeleEvent.sendMessage -= SendMessage;
                     client.Close();
